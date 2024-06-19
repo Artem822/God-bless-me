@@ -201,7 +201,7 @@ pip-selfcheck.json
 
 # Mono auto generated files
 mono_crash.*
-
+img/
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
