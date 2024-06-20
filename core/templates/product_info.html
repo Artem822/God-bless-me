@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}
+Product info
+{% endblock %}
+{% block content %}
+
+<div class='container'>
+<h1>{{product.name}} </h1>
+<img src="{{product.image.url}}" alt="None" width="250"> <br>
+<h2>Описание</h2>
+{{product.description}}<br>
+<h2>Цена: {{product.price}} $</h2>
+<h2>В наличии: {{product.stock}}</h2>
+
+</div>
+{% endblock %}
