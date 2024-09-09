@@ -19,13 +19,17 @@ from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
 from .views import Main
-from user_profile import views
+from user_profile.views import *
+from django.contrib.auth.views import LogoutView
+from cart.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", Main.as_view(), name="Main_page"),
     path('products/', include('products.urls')),
-    path('login/', views.Login, name='login')
+    path('login/', Login, name='login'),
+    path('logout/', LogoutView.as_view(), name='logout'),
+    path('cart/', CartList.as_view(), name='cart')
     
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

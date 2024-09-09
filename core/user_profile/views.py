@@ -1,9 +1,9 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import get_user_model, login
+from django.contrib.auth import  login
 
 
-user = get_user_model
+
 
 def Login(request):
     if request.method == "POST":

@@ -16,14 +16,23 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
-                        <a class="nav-link" href="{% url "Main_page" %}">Главная</a>
+                        <a class="nav-link" href="{% url 'Main_page' %}">Главная</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url "products_list" %}">Товары</a>
+                        <a class="nav-link" href="{% url 'products_list' %}">Товары</a>
                     </li>
+                    {% if  request.user.is_authenticated %}
+                    <li class="nav-item"></li>
+                        <a class="nav-link" href="{% url 'cart' %}">Корзина</a>
+                    </li>
+                    <li class="nav-item"></li>
+                        <a class="nav-link" href="{% url 'logout' %}">Выход</a>
+                    </li>
+                    {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url "login" %}">Вход</a>
+                        <a class="nav-link" href="{% url 'login' %}">Вход</a>
                     </li>
+                    {% endif %}
                 </ul>   
             </div> 
         </div> 
