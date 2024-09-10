@@ -15,10 +15,9 @@ Products
 
         <div class="col-md-8">
             <h3>{{product.name}}</h3>
-            <h4>Цена: {{product.price}} $</h4>
-            <a href="{% url 'product_info' product.pk %}"><button>Подробнее</button></a>
+            <h4>Цена: {{product.price}} Руб.</h4>
+            <a href="{% url 'product_info' product.id %}"><button>Подробнее</button></a>
         </div>
-        
     </div>
 </div>
 {% endfor %}

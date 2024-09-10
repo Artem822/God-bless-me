@@ -11,6 +11,9 @@ Product info
 {{product.description}}<br>
 <h2>Цена: {{product.price}} Руб.</h2>
 <h2>В наличии: {{product.stock}}</h2>
-
+<form action="{% url 'add' product.id %}" method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-sm btn-primary">Добавить в корзину</button>
+</form>
 </div>
 {% endblock %}
