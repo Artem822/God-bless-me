@@ -1,23 +1,31 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}
-Products
+Продукты
+{% endblock %}
+
+{% block link %}
+<link rel="stylesheet" href="{% static 'css/list.css' %}">
 {% endblock %}
 
 {% block content %}
-
 {% for product in products %}
-<div class="card mb-3" style="width: 60rem;">
-    <div class="row g-0">
-            <div class="col-md-4">
-                <img src="{{product.image.url}}" class="img-fluid rounded-start" alt="..." width='200'>
+<div class="container cards" >
+    <div class="row justify-content-between" style="margin-top: 10px;">
+      <div class="col-md-10">
+        <div class="card mb-10 box-shadow " style="width: 15rem; background-color:rgba(240, 248, 255, 0.76)">
+          <img class="card-img-top" src="{{product.image.url}}" >
+          <div class="card-body">
+            <h1 class="card-text">{{product.name}}</h1>
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <a href="{% url 'product_info' product.id %}"> <button type="button" class="btn btn-sm btn-outline-secondary">Подробнее</button> </a>
+                </div>
+                <small class="text-muted">Цена: {{product.price}} Руб.</small>
             </div>
-
-        <div class="col-md-8">
-            <h3>{{product.name}}</h3>
-            <h4>Цена: {{product.price}} Руб.</h4>
-            <a href="{% url 'product_info' product.id %}"><button>Подробнее</button></a>
         </div>
+      </div>
     </div>
 </div>
 {% endfor %}

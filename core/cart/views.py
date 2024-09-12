@@ -1,10 +1,10 @@
-from typing import Any
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.views import generic
 from .models import Cart
 from products.models import Product
 
 class CartList(generic.TemplateView):
+    redirect_field_name = 'login'
     def get(self, request):
         try:
             Cart.objects.get(user=request.user)
@@ -12,7 +12,8 @@ class CartList(generic.TemplateView):
             Cart.objects.create(user=request.user)
         context = {'cart_items':Cart.objects.get(user=request.user)}
         return render(request, 'cartlist.html', context)
-    
+
+
 def AddToCart(request, product_id):
     if request.method == 'POST':
         product = Product.objects.get(pk=product_id)
@@ -25,12 +26,9 @@ def AddToCart(request, product_id):
     return redirect('products_list')
 
 def DeleteFromCart(request, product_id):
-    if request.method == 'POST':
-        products_from_cart = Cart.objects.all()[0]
-        product = Product.objects.get(pk=product_id)
-
-        products_from_cart.product.remove(product)
-
-        return redirect('cart')
+    products_from_cart = Cart.objects.all()[0]
+    product = Product.objects.get(pk=product_id)
+    products_from_cart.product.remove(product)
+    return redirect('cart')
     
  

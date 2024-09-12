@@ -1,0 +1,18 @@
+
+.main-block {
+    background: #e2dbdbc9;
+    margin-top: 200px;
+    border-radius: 10px;
+
+}
+
+.btn-login button {
+    width: 125px;
+    height: 45px;
+    margin-top: 10px;
+    margin-left: 85px;
+}
+.login-btn{
+    align-items: center;
+    justify-content: center;
+}

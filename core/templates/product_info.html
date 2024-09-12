@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block title %}
-Product info
+Информация о продуктах
 {% endblock %}
 {% block content %}
 
@@ -11,9 +11,17 @@ Product info
 {{product.description}}<br>
 <h2>Цена: {{product.price}} Руб.</h2>
 <h2>В наличии: {{product.stock}}</h2>
-<form action="{% url 'add' product.id %}" method="post">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-sm btn-primary">Добавить в корзину</button>
-</form>
+{% if request.user.is_authenticated %}
+    {% if product not in user_products.product.all %}
+    <form action="{% url 'add' product.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-sm btn-primary">Добавить в корзину.</button>
+    </form>
+    {% else%}
+    <a href="{% url 'cart' %}"><button type="submit" class="btn btn-sm btn-secondary">Товар был добавлен в корзину.</button></a>
+    {% endif %}
+{% else %}
+<a href="{% url 'login' %}"><button type="submit" class="btn btn-sm btn-secondary">Пожалуйста, войдите в аккаунт.</button></a>
 </div>
+{% endif %}
 {% endblock %}

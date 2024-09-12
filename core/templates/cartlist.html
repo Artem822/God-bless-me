@@ -1,17 +1,36 @@
 {% extends "base.html" %}
+{% load static %}
+
 {% block title %}
 Корзина
 {% endblock %}
-{% block content %}
-    {% for product in cart_items.product.all%}
-        <div class='form-control container '>
-            <h1>{{product.name}} </h1>
-            <img src="{{product.image.url}}" alt="None" width="250"> <br>
-            <h2>Цена: {{product.price}} Руб.</h2>
-            <form action="{% url 'delete' product.id %}" method="post">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-sm btn-primary">Удалить</button>
-            </form>
-        </div>
-    {% endfor %}
+
+{% block link %}
+<link rel="stylesheet" href="{% static 'css/list.css' %}">
 {% endblock %}
+
+{% block content %}
+{% for product in cart_items.product.all %}
+<div class="container cards" >
+    <div class="row justify-content-between">
+      <div class="col-md-10">
+        <div class="card mb-10 box-shadow " style="width: 19rem; background-color:rgba(240, 248, 255, 0.76); margin-top: 10px;">
+          <img class="card-img-top" src="{{product.image.url}}" >
+          <div class="card-body">
+            <h1 class="card-text">{{product.name}}</h1>
+            <div class="d-flex justify-content-between align-items-center">
+                      <div class='btn-group'>
+                          <a href="{% url 'delete' product.id %}"><button type="submit" class="btn btn-sm btn-outline-secondary">Удалить</button></a>
+                          <a href="{% url 'product_info' product.id %}"> <button type="button" class="btn btn-sm btn-outline-secondary">Подробнее</button> </a>
+                      </div>
+                <div>
+                <small class="text-muted">Цена: {{product.price}} Руб.</small>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock content %}
+
